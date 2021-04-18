@@ -7,7 +7,20 @@ import android.provider.Settings;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mashkarharis.itrack404.POJO.LocationsToFirebase;
+import com.mashkarharis.itrack404.POJO.OneLocation;
+import com.mashkarharis.itrack404.R;
+
+import org.json.JSONArray;
+
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Time_Location {
@@ -19,10 +32,38 @@ public class Time_Location {
     private static boolean firebase_update(Location lc,long lft,Context applicationContext){
         try{
             String device_id= Settings.Secure.getString(applicationContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+            // Write a message to the database
+            FirebaseDatabase database = FirebaseDatabase.getInstance(applicationContext.getString(R.string.firebaseurl));
+            DatabaseReference myRef = database.getReference("UserData");
+            OneLocation oneloc=new OneLocation();
+            oneloc.setLatitude(lc.getLatitude());
+            oneloc.setLongitude(lc.getLongitude());
+            oneloc.setTime(lft);
 
+            LocationsToFirebase firelocations=new LocationsToFirebase();
+
+            ValueEventListener eventListener=new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                         //OneLocation loc = (ArrayList<>) snapshot.getValue();
+                        System.out.println(((HashMap)((ArrayList)snapshot.getValue()).get(0)).get("latitude"));
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("ERR ::::::::::::::::::::");
+                }
+            };
+
+            myRef.addListenerForSingleValueEvent(eventListener);
+            firelocations.addRecentloc(oneloc);
+
+            myRef.setValue(firelocations);
             System.out.println("FireBase Updating ... ");
             return true;
         }catch(Exception ex){
+            System.out.println("ERR434 - "+ex.toString());
             return false;
         }
     }

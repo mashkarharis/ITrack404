@@ -105,7 +105,7 @@ public class LocationChecker extends Service {
 
                     }
                     try {
-                        sleep(3000);
+                        sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
