@@ -5,19 +5,26 @@ import android.location.Location;
 import java.util.ArrayList;
 
 public class LocationsToFirebase {
-    public ArrayList<OneLocation> recentloc=new ArrayList<>();
+    public static ArrayList<OneLocation> recentloc=new ArrayList<>();
 
-    public ArrayList<OneLocation> getRecentloc() {
+    public static ArrayList<OneLocation> getRecentloc() {
         return recentloc;
     }
 
-    public void addRecentloc(OneLocation loc) {
-        if(this.recentloc.size()>=10){
-            this.recentloc.remove(0);
-            this.recentloc.add(loc);
+    public static void addRecentloc(OneLocation loc) {
+        if(recentloc.size()>=10){
+            recentloc.remove(0);
+            recentloc.add(loc);
             return;
         }
         recentloc.add(loc);
+
+
         return;
+    }
+    public static void printme(){
+        for (OneLocation one:recentloc) {
+            System.out.println("#---->>>"+one.getTime());
+        }
     }
 }

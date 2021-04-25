@@ -4,9 +4,11 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,20 +37,31 @@ public class Time_Location {
             // Write a message to the database
             FirebaseDatabase database = FirebaseDatabase.getInstance(applicationContext.getString(R.string.firebaseurl));
             DatabaseReference myRef = database.getReference("UserData");
-            OneLocation oneloc=new OneLocation();
-            oneloc.setLatitude(lc.getLatitude());
-            oneloc.setLongitude(lc.getLongitude());
-            oneloc.setTime(lft);
-
-            LocationsToFirebase firelocations=new LocationsToFirebase();
-
             ValueEventListener eventListener=new ValueEventListener() {
+
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                         //OneLocation loc = (ArrayList<>) snapshot.getValue();
-                        System.out.println(((HashMap)((ArrayList)snapshot.getValue()).get(0)).get("latitude"));
-                    }
+
+                       Iterable<DataSnapshot> fetchedlocs=dataSnapshot.child(device_id.toString()).child("recentloc").getChildren();
+                        for (DataSnapshot locs:fetchedlocs) {
+                            Log.i("LOCFETCH", locs.getValue().toString());
+                            Log.i("TIME", Long.parseLong(locs.child("time").getValue().toString()) + "");
+
+                            Long time = Long.parseLong(locs.child("time").getValue().toString());
+                            Double latitude = Double.parseDouble(locs.child("latitude").getValue().toString());
+                            Double longitude = Double.parseDouble(locs.child("longitude").getValue().toString());
+
+                            OneLocation oneloc = new OneLocation();
+                            oneloc.setTime(time);
+                            oneloc.setLatitude(latitude);
+                            oneloc.setLongitude(longitude);
+
+                            LocationsToFirebase.addRecentloc(oneloc);
+                        }
+
+
+
+
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -56,10 +69,19 @@ public class Time_Location {
                 }
             };
 
+           // System.out.println(myRef.child("4").);
             myRef.addListenerForSingleValueEvent(eventListener);
-            firelocations.addRecentloc(oneloc);
+            myRef.removeEventListener(eventListener);
 
-            myRef.setValue(firelocations);
+            OneLocation newloc=new OneLocation();
+            newloc.setTime(lft);
+            newloc.setLongitude(lc.getLongitude());
+            newloc.setLatitude(lc.getLatitude());
+            LocationsToFirebase.addRecentloc(newloc);
+
+            LocationsToFirebase.printme();
+            myRef.child(device_id.toString()).child("recentloc").setValue(LocationsToFirebase.getRecentloc());
+
             System.out.println("FireBase Updating ... ");
             return true;
         }catch(Exception ex){

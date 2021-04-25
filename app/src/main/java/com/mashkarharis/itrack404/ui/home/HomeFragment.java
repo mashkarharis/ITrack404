@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getData().put("device_id",device_id);
         System.out.println("device_id :"+device_id);
 
+        // getActivity().getActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
 
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -56,6 +58,7 @@ public class HomeFragment extends Fragment {
         // Assign device_id
         TextView device_id=getActivity().findViewById(R.id.device_id_value);
         device_id.setText(data.get("device_id"));
+
 
     }
 
