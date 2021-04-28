@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:justificationMode="inter_word"
-                        android:text="NOTE: We did not focus on security while developing this app. So use this at your own risk."
+                        android:text="NOTE: I did not focus on security while developing this app. So use this at your own risk."
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="#F80202" />
 
@@ -144,6 +144,71 @@
                         android:text="-"
                         android:textColor="#096A0D"
                         android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:outlineAmbientShadowColor="#000000"
+                android:outlineSpotShadowColor="#000000"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp">
+
+                    <!-- Media -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="How To Use"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="8dp"
+                        android:justificationMode="inter_word"
+                        android:text='It is easy to use. You just need to open application and give the required permission (App will ask for permission when you open it for the first time). Then you can see notification will be shown to indicate about the background service it runs to collect your data. When you need to know your recent locations just go to "MyLocation" tab and tap on the "FETCH" button.'
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:justificationMode="inter_word"
+                        android:text="For Now We Collect 60 Recent Locations With 1min frequency, Which will approximately show your recent locations for last 1HR."
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="#035711" />
 
 
                 </LinearLayout>
