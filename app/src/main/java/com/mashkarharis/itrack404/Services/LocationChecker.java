@@ -9,6 +9,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -63,8 +64,9 @@ public class LocationChecker extends Service implements LocationListener {
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
         return new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("WE TRY TO COLLECT YOUR LOCATION").setSmallIcon(R.drawable.ic_home_black_24dp)
-                .setContentIntent(pendingIntent).setStyle(new NotificationCompat.BigTextStyle()
+                .setContentTitle("WE TRY TO COLLECT YOUR LOCATION").setSmallIcon(R.drawable.ic_dashboard_black_24dp).setLargeIcon(
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.logo)
+                ).setContentIntent(pendingIntent).setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(Content))
                 .build();
     }

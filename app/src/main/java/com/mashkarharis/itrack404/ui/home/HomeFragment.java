@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getData().put("device_id",device_id);
         System.out.println("device_id :"+device_id);
 
-        // getActivity().getActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
+        //getActivity().getActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
 
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);

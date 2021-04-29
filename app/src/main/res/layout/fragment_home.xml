@@ -206,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:justificationMode="inter_word"
-                        android:text="For Now We Collect 60 Recent Locations With 1min frequency, Which will approximately show your recent locations for last 1HR."
+                        android:text="For Now App Collects 60 Recent Locations With 1min frequency, Which will approximately show your recent locations for last 1HR."
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="#035711" />
 

@@ -49,13 +49,7 @@ public class DashboardFragment extends Fragment  implements OnMapReadyCallback {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
 
         mapView = (MapView) root.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -109,7 +103,7 @@ public class DashboardFragment extends Fragment  implements OnMapReadyCallback {
                     int i=1;
                     map.clear();
                     PolylineOptions polyops=new PolylineOptions();
-                    polyops.width(5).color(Color.GREEN).geodesic(true);
+                    polyops.width(5).color(Color.BLUE).geodesic(true);
                     for (OneLocation oneloc:LocationsFromFirebase.getRecentloc()) {
                         pos = new LatLng(oneloc.getLatitude(),oneloc.getLongitude());
                         polyops.add(pos);

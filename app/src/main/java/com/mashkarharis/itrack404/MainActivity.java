@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
+      //  getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
        // getActionBar().setTitle("I'M Here");
 
     }
