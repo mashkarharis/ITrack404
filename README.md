@@ -1,5 +1,5 @@
 # I Track 404
-Slef Tracking Native Java Android Application.
+Self Tracking Native Java Android Application.
 #### Features
 - Realtime Location Collecting
 - User can view his/her past locations
